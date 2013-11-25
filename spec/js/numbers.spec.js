@@ -10,6 +10,40 @@ describe("Numbers", function(){
     I18n.translations = Translations();
   });
 
+  it("formats percentage with default settings", function(){
+    expect(I18n.toPercentage(1)).toEqual("1.000%");
+    expect(I18n.toPercentage(12)).toEqual("12.000%");
+    expect(I18n.toPercentage(123)).toEqual("123.000%");
+    expect(I18n.toPercentage(1234)).toEqual("1234.000%");
+    expect(I18n.toPercentage(1234.5)).toEqual("1234.500%");
+    expect(I18n.toPercentage(1234.56)).toEqual("1234.560%");
+    expect(I18n.toPercentage(1234.567)).toEqual("1234.567%");
+    expect(I18n.toPercentage(1234.5678)).toEqual("1234.568%");
+    expect(I18n.toPercentage(1234.56789)).toEqual("1234.568%");
+  });
+
+  it("formats percentage with full translation and default options", function(){
+    I18n.translations.en.number.percentage = {
+      format: {
+        precision: 2,
+        format: "%n %",
+        delimiter: ".",
+        separator: ",",
+        strip_insignificant_zeros: true
+      }
+    };
+
+    expect(I18n.toPercentage(1)).toEqual("1 %");
+    expect(I18n.toPercentage(12)).toEqual("12 %");
+    expect(I18n.toPercentage(123)).toEqual("123 %");
+    expect(I18n.toPercentage(1234)).toEqual("1.234 %");
+    expect(I18n.toPercentage(1234.5)).toEqual("1.234,5 %");
+    expect(I18n.toPercentage(1234.56)).toEqual("1.234,56 %");
+    expect(I18n.toPercentage(1234.567)).toEqual("1.234,57 %");
+    expect(I18n.toPercentage(1234.5678)).toEqual("1.234,57 %");
+    expect(I18n.toPercentage(1234.56789)).toEqual("1.234,57 %");
+  });
+
   it("formats number with default settings", function(){
     expect(I18n.toNumber(1)).toEqual("1.000");
     expect(I18n.toNumber(12)).toEqual("12.000");

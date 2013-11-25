@@ -52,6 +52,7 @@
       precision: 3
     , separator: "."
     , delimiter: ""
+    , format: "%n%"
   };
 
   // Set default size units.
@@ -638,7 +639,7 @@
     );
 
     number = this.toNumber(number, options);
-    return number + "%";
+    return options.format.replace("%n", number);
   };
 
   // Convert a number into a readable size representation.
