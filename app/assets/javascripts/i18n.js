@@ -404,6 +404,13 @@
       , CURRENCY_FORMAT
     );
 
+    options.negative_format = options.negative_format || "-" + options.format;
+
+    if (number < 0 ){
+      options.format = options.negative_format;
+      number = Math.abs(number);
+    }
+
     number = that.toNumber(number, options);
     number = options.format
       .replace("%u", options.unit)
