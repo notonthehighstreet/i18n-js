@@ -183,18 +183,28 @@ describe("Dates", function(){
   });
 
   it("formats date with custom meridian", function(){
-    I18n.locale = "en-US";
+    I18n.locale = "en-Test";
+    I18n.translations["en-Test"] = {
+        date: {
+            meridian: ['EGG', 'BEAN']
+        }
+    }
     var date = new Date(2009, 3, 26, 19, 35, 44);
-    expect(I18n.strftime(date, "%p")).toEqual("pm");
+    expect(I18n.strftime(date, "%p")).toEqual("BEAN");
   });
 
   it("formats date with meridian boundaries", function(){
-    I18n.locale = "en-US";
+    I18n.locale = "en-Test";
+    I18n.translations["en-Test"] = {
+        date: {
+            meridian: ['EGG', 'BEAN']
+        }
+    }
     var date = new Date(2009, 3, 26, 0, 35, 44);
-    expect(I18n.strftime(date, "%p")).toEqual("am");
+    expect(I18n.strftime(date, "%p")).toEqual("EGG");
 
     date = new Date(2009, 3, 26, 12, 35, 44);
-    expect(I18n.strftime(date, "%p")).toEqual("pm");
+    expect(I18n.strftime(date, "%p")).toEqual("BEAN");
   });
 
   it("formats date using 12-hours format", function(){

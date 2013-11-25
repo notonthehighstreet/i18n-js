@@ -38,50 +38,6 @@ describe("Translate", function(){
     expect(I18n.t("hello", {locale: "pt-BR"})).toEqual("Olá Mundo!");
   });
 
-  it("fallbacks to the default locale when I18n.fallbackss is enabled", function(){
-    I18n.locale = "pt-BR";
-    I18n.fallbacks = true;
-    expect(I18n.t("greetings.stranger")).toEqual("Hello stranger!");
-  });
-
-  it("fallbacks to default locale when providing an unknown locale", function(){
-    I18n.locale = "fr";
-    I18n.fallbacks = true;
-    expect(I18n.t("greetings.stranger")).toEqual("Hello stranger!");
-  });
-
-  it("fallbacks to less specific locale", function(){
-    I18n.locale = "de-DE";
-    I18n.fallbacks = true;
-    expect(I18n.t("hello")).toEqual("Hallo Welt!");
-  });
-
-  it("fallbacks using custom rules (function)", function(){
-    I18n.locale = "no";
-    I18n.fallbacks = true;
-    I18n.locales["no"] = function() {
-      return ["nb"];
-    };
-
-    expect(I18n.t("hello")).toEqual("Hei Verden!");
-  });
-
-  it("fallbacks using custom rules (array)", function() {
-    I18n.locale = "no";
-    I18n.fallbacks = true;
-    I18n.locales["no"] = ["no", "nb"];
-
-    expect(I18n.t("hello")).toEqual("Hei Verden!");
-  });
-
-  it("fallbacks using custom rules (string)", function() {
-    I18n.locale = "no";
-    I18n.fallbacks = true;
-    I18n.locales["no"] = "nb";
-
-    expect(I18n.t("hello")).toEqual("Hei Verden!");
-  });
-
   it("uses default value for simple translation", function(){
     actual = I18n.t("warning", {defaultValue: "Warning!"});
     expect(actual).toEqual("Warning!");

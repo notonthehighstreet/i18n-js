@@ -47,10 +47,7 @@
             }
           }
         }
-    };
-
-    Translations["en-US"] = {
-      date: {
+      , date: {
           formats: {
               "default": "%d/%m/%Y"
             , "short": "%d de %B"
@@ -88,6 +85,7 @@
           , abbr_day_names: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"]
           , month_names: [null, "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
           , abbr_month_names: [null, "Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+          , meridian: ["AM", "PM"]
         }
 
       , time: {
@@ -96,8 +94,6 @@
               , "short": "%d/%m, %H:%M h"
               , "long": "%A, %d de %B de %Y, %H:%M h"
             }
-          , am: "AM"
-          , pm: "PM"
         }
     };
 
