@@ -69,8 +69,8 @@ describe I18n::JS do
     it "filters translations using multi-star scope" do
       result = I18n::JS.scoped_translations("*.*.formats")
 
-      result[:en].keys.collect(&:to_s).sort.should eql(%w[ date time ])
-      result[:fr].keys.collect(&:to_s).sort.should eql(%w[ date time ])
+      result[:en].keys.collect(&:to_s).sort.should eql(["admin", "date", "number", "time"])
+      result[:fr].keys.collect(&:to_s).sort.should eql(["admin", "date", "number", "time"])
 
       result[:en][:date].keys.should eql([:formats])
       result[:en][:time].keys.should eql([:formats])

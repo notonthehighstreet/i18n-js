@@ -103,9 +103,9 @@ module I18n
       FileUtils.mkdir_p File.dirname(file)
 
       File.open(file, "w+") do |f|
-        f << %(I18n.translations = );
+        f << "I18n.storeTranslations("
         f << translations.to_json
-        f << %(;)
+        f << ");"
       end
     end
 
@@ -135,7 +135,7 @@ module I18n
       elsif translations.has_key?(scope.to_sym)
         return {scope.to_sym => scopes.empty? ? translations[scope.to_sym] : filter(translations[scope.to_sym], scopes)}
       end
-      nil
+      {}
     end
 
     # Initialize and return translations

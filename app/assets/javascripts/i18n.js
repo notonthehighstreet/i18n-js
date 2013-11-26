@@ -118,24 +118,16 @@
     return value !== undefined && value !== null;
   };
 
-  var merge = function(a,b){
-    var result = {};
-    a = a || {};
-    b = b || {};
-
-    for(var key1 in a){
-      if(a.hasOwnProperty(key1)){
-        result[key1] = a[key1];
+  var merge = function(destination, source) {
+    for (var property in source) {
+      if (typeof source[property] === "object") {
+        destination[property] = destination[property] || {};
+        merge(destination[property], source[property]);
+      } else {
+        destination[property] = source[property];
       }
     }
-
-    for(var key2 in b){
-      if(b.hasOwnProperty(key2)){
-        result[key2] = b[key2];
-      }
-    }
-
-    return result;
+    return destination;
   };
 
   var unique = function(array){
@@ -165,6 +157,11 @@
     }
   };
 
+  // merges translations
+  I18n.storeTranslations = function(translations){
+    merge(that.translations, translations);
+  };
+
   // Find and process the translation using the provided scope and options.
   // This is used internally by some functions and should not be used as an
   // public API.
@@ -183,8 +180,8 @@
         var result = localeLookup(scope, currentLocale);
 
         if (typeof result == "object"){
-          var merged = merge(result, value);
-          return recurseFallbacks(scope, fallbacks, merged);
+          merge(result, value);
+          return recurseFallbacks(scope, fallbacks, result);
         } else if (result === undefined || result === null){
           return recurseFallbacks(scope, fallbacks, value);
         } else {
