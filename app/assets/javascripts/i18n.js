@@ -120,7 +120,8 @@
 
   var merge = function(destination, source) {
     for (var property in source) {
-      if (typeof source[property] === "object") {
+      var mergeable = typeof source[property] === "object" && !(source[property] instanceof Array);
+      if (mergeable) {
         destination[property] = destination[property] || {};
         merge(destination[property], source[property]);
       } else {

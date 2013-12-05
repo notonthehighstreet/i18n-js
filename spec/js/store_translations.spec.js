@@ -39,5 +39,21 @@ describe("storeTranslations", function(){
         }
       });
     });
+
+    it("should not merge additional translations when they are an array", function(){
+      I18n.storeTranslations({
+        "de" : {
+          "bottles" : ["99","98","97"]
+        }
+      });
+      I18n.storeTranslations({
+        "de" : {
+          "bottles" : ["0"],
+        }
+      });
+
+      expect(I18n.translations["de"]["bottles"]).toEqual( ["0"] );
+    });
+
   });
 });
