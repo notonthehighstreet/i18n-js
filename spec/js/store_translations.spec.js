@@ -55,5 +55,18 @@ describe("storeTranslations", function(){
       expect(I18n.translations["de"]["bottles"]).toEqual( ["0"] );
     });
 
+    it("should not merge string objects", function (){
+      I18n.storeTranslations({
+        "de" : {
+          "cake" : new String("chocolate")
+        }
+      });
+      I18n.storeTranslations({
+        "de" : {
+          "cake" : new String("fairy")
+        }
+      });
+      expect(I18n.translations["de"]["cake"]).toEqual("fairy");
+    });
   });
 });

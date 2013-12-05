@@ -120,7 +120,7 @@
 
   var merge = function(destination, source) {
     for (var property in source) {
-      var mergeable = typeof source[property] === "object" && !(source[property] instanceof Array);
+      var mergeable = source[property].constructor.prototype === Object.prototype;
       if (mergeable) {
         destination[property] = destination[property] || {};
         merge(destination[property], source[property]);
@@ -180,7 +180,7 @@
         var currentLocale = fallbacks.shift();
         var result = localeLookup(scope, currentLocale);
 
-        if (typeof result == "object"){
+        if (result != null && result.constructor.prototype === Object.prototype){
           merge(result, value);
           return recurseFallbacks(scope, fallbacks, result);
         } else if (result === undefined || result === null){
